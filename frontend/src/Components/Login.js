@@ -5,6 +5,7 @@ import axios from 'axios'
 
 function Login() {
   const [data,setData] = useState({
+    _id:'',
     username:'',
     password:''
   })
@@ -19,7 +20,7 @@ function Login() {
       try {
         const response = await axios.post('http://localhost:5001/validate', data);
         console.log('Request sent:', response.data);
-        navigate('/home');
+        navigate('/home/'+response.data);
       } catch (error) {
         console.error('Login failed:', error.response.data.error || 'Unknown error');
         window.alert('Invalid Credentials');

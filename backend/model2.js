@@ -17,7 +17,7 @@ const TranData = mongoose.Schema({
         type: String,
         require: true
     },
-    Ref: {
+    ref: {
         type: String,
         require: true
     }

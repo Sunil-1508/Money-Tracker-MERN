@@ -36,11 +36,12 @@ app.post('/post', async (req, res) => {
   
 app.post('/validate', async (req, res) => {
   try {
-      const { username, email, password } = req.body;
+      const { username, password } = req.body;
       const user = await Data.findOne({ username });
   
       if (user && user.password === password) {
-        return res.status(200).json({ message: "Successfully logged in" });
+        //res.status(200).json({ message: "Successfully logged in" });
+        return res.send(user._id);
       }
    
       res.status(401).json({ error: "Invalid credentials" });
@@ -84,7 +85,7 @@ app.get('/getdata',async (req,res)=>{
 app.get('/getdata/:id',async (req,res)=>{
     try{
         const data =await Data.findById(req.params.id);
-        return res.send(data);
+        res.send(data);
     }
     catch(err){
         console.log(err.message);
