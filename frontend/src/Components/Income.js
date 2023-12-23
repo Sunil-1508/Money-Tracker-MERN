@@ -10,33 +10,62 @@ useEffect(()=>{
         .then(res=>{setTData(res.data)})
         .catch(err=>console.log(err));
 },[])
+
+const [data,setData] = useState({
+    title:'',
+    date:'',
+    amount:'',
+    type:'Income',
+    ref:''
+})
+
+const submitHandeler =  (e)=>{ 
+        e.preventDefault();
+        console.log(data);
+        axios.post('http://localhost:5001/transactions',data)
+        .then(window.location.reload())
+        .catch(error=>{
+        console.error('Login failed:', error.response.data.error || 'Unknown error');
+        window.alert('Invalid Credentials');
+        })
+}
   return (
-    <div className="right-down row p-2 justify-content-around align-items-center h-75">
+    <div className="right-down row p-2 h-100">
     <div className="col-md-5 h-100 rounded text-center">
-      <div className="row h-100 justify-content-around me-1 rounded border align-items-center">
-        <form >
-        <div class="mb-3 row">
-            <label for="title" class="col-sm-2 col-form-label">Title</label>
-        <div class="col-sm-9 ms-3">
-            <input type="text" class="form-control" id="title" placeholder='Enter Income Source Title' />
+      <div className="row h-100 justify-content-around me-1 rounded border align-items-start pt-5">
+        <h3><i>Add A New Income</i></h3>
+        <form onSubmit={submitHandeler}>
+        <div className="mb-3 row">
+            <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
+        <div className="col-sm-9 ms-3">
+            <input type="text" className="form-control" id="title" placeholder='Enter Income Source Title' 
+            onChange={(e)=>setData({...data,title:e.target.value })}/>
         </div>
         </div>
-        <div class="mb-3 row">
-            <label for="date" class="col-sm-2 col-form-label">Date</label>
-        <div class="col-sm-9 ms-3">
-            <input type="date" class="form-control" id="date" />
+        <div className="mb-3 row">
+            <label htmlFor="date" className="col-sm-2 col-form-label">Date</label>
+        <div className="col-sm-9 ms-3">
+            <input type="date" className="form-control" id="date" 
+            onChange={(e)=>setData({...data,date:e.target.value })}/>
         </div>
         </div>
-        <div class="mb-3 row">
-            <label for="amount" class="col-sm-2 col-form-label">Amount</label>
-        <div class="col-sm-9 ms-3">
-            <input type="Number" class="form-control" id="amount" placeholder='Enter Amount' />
+        <div className="mb-3 row">
+            <label htmlFor="amount" className="col-sm-2 col-form-label">Amount</label>
+        <div className="col-sm-9 ms-3">
+            <input type="text" className="form-control" id="amount" placeholder='Enter Amount' 
+            onChange={(e)=>setData({...data,amount:e.target.value })}/>
         </div>
         </div>
-        <div class="mb-3  row">
-            <label for="ref" class="col-sm-2 col-form-label">Reference</label>
-        <div class="col-sm-9 ms-3">
-            <textarea type="text" class="form-control" id="ref" placeholder='Enter Brief Reference' />
+        <div className="mb-3  row">
+            <label htmlFor="ref" className="col-sm-2 col-form-label">Reference</label>
+        <div className="col-sm-9 ms-3">
+            <select type="text" className="form-control" id="ref" placeholder='Enter Brief Reference' 
+            onChange={(e)=>setData({...data,ref:e.target.value })}>
+                <option>Salary</option>
+                <option>Part-Time</option>
+                <option>FreeLancing</option>
+                <option>Others</option>
+            </select>
         </div>
         </div>
         <div className='ps-3'>
@@ -46,16 +75,16 @@ useEffect(()=>{
         </form>
       </div>
     </div>
-    <div className="col-md-7  border p-2 h-100 rounded">
-    <div className="d-flex flex-column gap-2 h-100 rounded  text-center">
-  <table className='table table-striped'>
+    <div className="col-md-7  border h-100 rounded">
+    <div className="d-flex flex-column gap-2 h-100 rounded  text-center pt-2">
+    <h3><i>Recent Income's</i></h3>
+    <table className='table table-striped' >
       <thead>
           <tr>
           <th>S.No</th>
           <th>Title</th>
           <th>Date</th>
           <th>Amount</th>
-          <th>Type</th>
           <th>Reference</th>
           <th>Balance</th>
       
@@ -63,13 +92,12 @@ useEffect(()=>{
       </thead>
       <tbody>
           {
-              Trandata.map((item,id) => (
+              Trandata.filter(item => item.type == 'Income').slice(0,8).map((item,id) => (
                   <tr key={id}>
                       <td>{id+1}</td>
                       <td>{item.title}</td>
                       <td>{item.date}</td>
                       <td>{item.amount}</td>
-                      <td>{item.type}</td>
                       <td>{item.ref}</td>
                       <td>1000</td>
                   </tr>
@@ -77,8 +105,12 @@ useEffect(()=>{
           }
       </tbody>
   </table>
+  <div className="row w-100 align-items-center justify-content-around ">
+  <button className='col-md-2 btn btn-light'>Previous</button>
+  <button className='col-md-2 btn btn-light'>Next</button>
   </div>
-    </div>
+  </div>
+  </div>
     </div>
   )
 }

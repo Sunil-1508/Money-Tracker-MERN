@@ -10,9 +10,10 @@ function Transactions() {
         .catch(err=>console.log(err));
   },[])
   return (
-    <div className="col-md-12  border p-3 h-75 rounded">
-        <div className="d-flex flex-column gap-2 h-100 rounded  text-center">
-        <table className='table table-striped'>
+    <div className=" p-2  h-100">
+    <div className="col-md-12  border px-3 pt-3 rounded ">
+        <div className="d-flex flex-column gap-2  rounded  text-center" >
+        <table className='table table-striped '>
             <thead>
                 <tr>
                 <th>S.No</th>
@@ -27,7 +28,7 @@ function Transactions() {
             </thead>
             <tbody>
                 {
-                    Trandata.map((item,id) => (
+                    Trandata.slice(0,10).map((item,id) => (
                         <tr key={id}>
                             <td>{id+1}</td>
                             <td>{item.title}</td>
@@ -41,6 +42,7 @@ function Transactions() {
                 }
             </tbody>
         </table>
+        </div>
         </div>
     </div>
   )

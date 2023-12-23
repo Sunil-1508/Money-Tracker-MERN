@@ -30,7 +30,7 @@ const [logindata,setLoginData] = useState({
 
   return (
     <dvi className="bg-secondary container-fluid row px-3 py-5 vh-100 w-100 m-0 gap-5">
-      <div className="col-md-2 left rounded bg-dark vh-80  text-white p-5">
+      <div className="col-md-2 left rounded bg-dark vh-75  text-white p-5">
         <h5 >Hi, {logindata.username} </h5>
         <div className="d-flex flex-column justify-content-between align-items-center h-100" >
           <div className="left-up d-flex flex-column gap-3  pt-4 rounded">
@@ -44,8 +44,8 @@ const [logindata,setLoginData] = useState({
         </div>
         </div>
       </div>
-      <div className="col-md-9 right rounded bg-dark vh-80 text-white p-5">
-        <h2 className='pb-5'>Your {heading} </h2>
+      <div className="col-md-9 right rounded bg-dark vh-75 text-white p-5">
+        <h2>Your {heading} </h2>
         {heading==='Dashboard' && <Dashboard />}
         {heading==='Transactions' && <Transactions />}
         {heading==='Incomes' && <Income />}

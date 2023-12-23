@@ -52,7 +52,10 @@ app.post('/validate', async (req, res) => {
 //For Transactions in dashboard----------------------------------------------------------------------------------------->
 app.post('/transactions', async (req, res) => {
   try {
-    const Tdata = new Data(req.body);
+    const Tdata = new TranData(req.body);
+    if(Tdata.title=='' || Tdata.date=='' || Tdata.amount=='' || Tdata.type=='' || Tdata.ref==''){
+      return res.status(400).json({ error: "Incomplete Data" });
+    }
     await Tdata.save();
     res.status(200).json({ message: "Successfully Saved Data to DB" });
   } catch (err) {
