@@ -14,7 +14,7 @@ function Transactions() {
   },[])
 
   const [page,pageNav]=useState([0,9]);
-  const show = Trandata.length >= 9;
+  const show = Trandata.length > 9;
 
 
   return (
@@ -38,13 +38,13 @@ function Transactions() {
                 {
                     Trandata.slice(page[0],page[1]).map((item,id) => (
                         <tr key={id}>
-                            <td>{id+1}</td>
-                            <td>{item.title}</td>
-                            <td>{item.date}</td>
-                            <td>{item.amount}₹</td>
-                            <td>{item.type}</td>
-                            <td>{item.ref}</td>
-                            <td>1000</td>
+                            <td >{id+1}</td>
+                            <td >{item.title}</td>
+                            <td >{item.date}</td>
+                            <td style={{'color': (item.type==='Expense')?'red':'green', fontWeight : 'bold'}} >{item.amount}₹</td>
+                            <td >{item.type}</td>
+                            <td >{item.ref}</td>
+                            <td >1000</td>
                         </tr>
                     ))
                 }

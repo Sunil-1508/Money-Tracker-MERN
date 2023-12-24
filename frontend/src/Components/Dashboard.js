@@ -53,7 +53,7 @@ function Dashboard() {
                             <td>{id+1}</td>
                             <td>{item.title}</td>
                             <td>{item.date}</td>
-                            <td>{item.amount}₹</td>
+                            <td style={{color: (item.type==='Expense')?'red':'green', fontWeight : 'bold'}} >{item.amount}₹</td>
                             <td>{item.type}</td>
                             <td>{item.ref}</td>
                             <td>1000</td>

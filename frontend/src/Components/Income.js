@@ -23,8 +23,8 @@ const [data,setData] = useState({
 })
 
 const [page,pageNav]=useState([0,8]);
-
-const show = Trandata.filter(item => item.type === 'Income' ).length >= 8;
+const maxlen = Trandata.filter(item => item.type === 'Income' ).length;
+const show = maxlen >= 8;
 
 const submitHandeler =  (e)=>{ 
         e.preventDefault();
@@ -76,8 +76,8 @@ const submitHandeler =  (e)=>{
         </div>
         </div>
         <div className='ps-3'>
-          <input type='submit' className='btn btn-success me-1' value='Add' /> 
-          <button className='btn btn-warning ms-1' >Cancle</button>          
+          <input type='submit'className='btn btn-success me-1' value='Add' /> 
+          <input type='reset' className='btn btn-secondary ms-1' value='Clear' />           
         </div>
         </form>
       </div>
@@ -109,7 +109,7 @@ const submitHandeler =  (e)=>{
                       <td>{id+1}</td>
                       <td>{item.title}</td>
                       <td>{item.date}</td>
-                      <td>{item.amount}₹</td>
+                      <td style={{'color': 'green', fontWeight : 'bold'}} >{item.amount}₹</td>
                       <td>{item.ref}</td>
                       <td>1000</td>
                   </tr>
@@ -119,7 +119,7 @@ const submitHandeler =  (e)=>{
   </table>
   {show && <div className="row w-100 align-items-center justify-content-around p-0 ">
   <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]-8,page[1]-8])} disabled={page[0] === 0} > Previous </button>
-  <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]+8,page[1]+8])} disabled={page[1] >= Trandata.length} > Next </button>
+  <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]+8,page[1]+8])} disabled={page[1] >= maxlen} > Next </button>
   </div>}
   </div>
   </div>
