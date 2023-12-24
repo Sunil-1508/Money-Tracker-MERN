@@ -6,12 +6,20 @@ function Transactions() {
     const [Trandata,setTData] = useState([])
   useEffect(()=>{
         axios.get('http://localhost:5001/transactions')
-        .then(res=>{setTData(res.data)})
+        .then(res=>{
+            const sortedData = res.data.sort((a, b) => { return new Date(b.date) - new Date(a.date); });     
+            setTData(sortedData)
+        })
         .catch(err=>console.log(err));
   },[])
+
+  const [page,pageNav]=useState([0,9]);
+  const show = Trandata.length >= 9;
+
+
   return (
-    <div className=" p-2  h-100">
-    <div className="col-md-12  border px-3 pt-3 rounded ">
+    <div className="h-100 pb-2">
+    <div className="col-md-12 h-100 border px-2 pt-2 rounded ">
         <div className="d-flex flex-column gap-2  rounded  text-center" >
         <table className='table table-striped '>
             <thead>
@@ -28,12 +36,12 @@ function Transactions() {
             </thead>
             <tbody>
                 {
-                    Trandata.slice(0,10).map((item,id) => (
+                    Trandata.slice(page[0],page[1]).map((item,id) => (
                         <tr key={id}>
                             <td>{id+1}</td>
                             <td>{item.title}</td>
                             <td>{item.date}</td>
-                            <td>{item.amount}</td>
+                            <td>{item.amount}₹</td>
                             <td>{item.type}</td>
                             <td>{item.ref}</td>
                             <td>1000</td>
@@ -42,6 +50,10 @@ function Transactions() {
                 }
             </tbody>
         </table>
+        {show && <div className="row w-100 align-items-center justify-content-around pb-3 ">
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]-9,page[1]-9])} disabled={page[0] === 0} > Previous </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]+9,page[1]+9])} disabled={page[1] >= Trandata.length} > Next </button>
+        </div>}
         </div>
         </div>
     </div>
