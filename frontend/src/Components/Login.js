@@ -30,8 +30,9 @@ function Login() {
 
   return (
     <div className='vh-100 bg-secondary d-flex flex-column align-items-center justify-content-center'>
-      <h3>WELCOME</h3>
-      <div className='h-50 bg-dark text-white rounded p-5'>
+      <div className='bg-dark text-white rounded mb-5 p-4'><h1>£ ¥ € ₹ $ <b>Money Tracker</b> $ ₹ € ¥ £</h1></div>
+      <div className='h-50 bg-dark text-white rounded p-4 w-25'>
+      <h3 className='mb-2 text-center'>WELCOME</h3>
         <form className='form form-striped px-2' onSubmit={submitHandler}>
           <div className='mb-3'>
           <label htmlFor='user'>Username</label>
@@ -43,7 +44,7 @@ function Login() {
           <input type='password' className='form-control' name='password' id='pass' 
           placeholder='Enter password' onChange={(e)=>setData({...data, password:e.target.value})}/>
           </div>
-          <div className='ps-3'>
+          <div className='text-center'>
           <input type='submit' className='btn btn-success me-1' value='Login' />or 
           <button className='btn btn-warning ms-1' onClick={()=>navigate('/Register')} >Register</button>          
           </div>

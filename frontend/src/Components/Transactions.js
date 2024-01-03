@@ -3,7 +3,8 @@ import axios from 'axios'
 import 'bootstrap'
 
 function Transactions() {
-    const [Trandata,setTData] = useState([])
+  const [Trandata,setTData] = useState([]);
+  const [inc,setInc] = useState(0);
   useEffect(()=>{
         axios.get('http://localhost:5001/transactions')
         .then(res=>{
@@ -29,30 +30,27 @@ function Transactions() {
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Type</th>
-                <th>Reference</th>
-                <th>Balance</th>
-            
+                <th>Reference</th>          
                 </tr>
             </thead>
             <tbody>
                 {
                     Trandata.slice(page[0],page[1]).map((item,id) => (
                         <tr key={id}>
-                            <td >{id+1}</td>
+                            <td >{id+1+inc}</td>
                             <td >{item.title}</td>
                             <td >{item.date}</td>
                             <td style={{'color': (item.type==='Expense')?'red':'green', fontWeight : 'bold'}} >{item.amount}₹</td>
                             <td >{item.type}</td>
                             <td >{item.ref}</td>
-                            <td >1000</td>
                         </tr>
                     ))
                 }
             </tbody>
         </table>
         {show && <div className="row w-100 align-items-center justify-content-around pb-3 ">
-            <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]-9,page[1]-9])} disabled={page[0] === 0} > Previous </button>
-            <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]+9,page[1]+9])} disabled={page[1] >= Trandata.length} > Next </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-9,page[1]-9]); setInc(inc-9); }} disabled={page[0] === 0} > Previous </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+9,page[1]+9]); setInc(inc+9); }} disabled={page[1] >= Trandata.length} > Next </button>
         </div>}
         </div>
         </div>

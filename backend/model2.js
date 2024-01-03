@@ -10,7 +10,7 @@ const TranData = mongoose.Schema({
         require: true
     },
     amount: {
-        type: String,
+        type: Number,
         require: true
     },
     type: {

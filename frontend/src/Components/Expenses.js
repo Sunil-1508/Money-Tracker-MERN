@@ -5,11 +5,18 @@ import 'bootstrap'
 
 function Expenses() {
 const [Trandata,setTData] = useState([])
+const [Texpense, setTExpense] = useState(0);  
+const [inc,setInc] = useState(0);
+
 useEffect(()=>{
         axios.get('http://localhost:5001/transactions')
         .then(res=>{
           const sortedData = res.data.sort((a, b) => { return new Date(b.date) - new Date(a.date); });     
-          setTData(sortedData)
+          setTData(sortedData);
+
+          let Texp = 0;
+          sortedData.forEach( item => { if(item.type=== 'Expense'){ Texp += item.amount; }});
+          setTExpense(Math.round(Texp*1000)/1000);
       })
         .catch(err=>console.log(err));
 },[])
@@ -73,6 +80,7 @@ const show = maxlen > 8;
                 <option defaultChecked>Food</option>
                 <option>House Rent</option>
                 <option>Entertainment</option>
+                <option>Shopping</option>
                 <option>Others</option>
             </select>
         </div>
@@ -85,7 +93,7 @@ const show = maxlen > 8;
       </div>
       <div className="row h-25 justify-content-around align-items-center">
               <div className="col-md-5 border rounded text-warning fw-bold p-2 ">
-                Total Expense<h4 className='pt-1 text-danger  fw-bold'>6000₹</h4>
+                Total Expense<h4 className='pt-1 text-danger  fw-bold'>{Texpense} ₹</h4>
               </div>
       </div>
     </div>
@@ -99,29 +107,26 @@ const show = maxlen > 8;
           <th>Title</th>
           <th>Date</th>
           <th>Amount</th>
-          <th>Reference</th>
-          <th>Balance</th>
-      
+          <th>Reference</th>   
           </tr>
       </thead>
       <tbody>
           {
               Trandata.filter(item => item.type === 'Expense').slice(page[0],page[1]).map((item,id) => (
                   <tr key={id}>
-                      <td>{id+1}</td>
+                      <td>{id+1+inc}</td>
                       <td>{item.title}</td>
                       <td>{item.date}</td>
                       <td style={{'color': 'red', fontWeight : 'bold'}} >{item.amount}₹</td>
                       <td>{item.ref}</td>
-                      <td>1000</td>
                   </tr>
               ))
           }
       </tbody>
   </table>
-  { show && <div className="row w-100 align-items-center justify-content-around ">
-  <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]-8,page[1]-8])} disabled={page[0] === 0} > Previous </button>
-  <button className='col-md-2 btn btn-light p-0' onClick={()=>pageNav([page[0]+8,page[1]+8])} disabled={page[1] >= maxlen} > Next </button>
+  {show && <div className="row w-100 align-items-center justify-content-around p-0 ">
+    <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-8,page[1]-8]); setInc(inc-8); }} disabled={page[0] === 0} > Previous </button>
+    <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+8,page[1]+8]); setInc(inc+8); }} disabled={page[1] >= Trandata.filter(item => item.type === 'Expense').length} > Next </button>
   </div>}
   </div>
   </div>

@@ -4,29 +4,45 @@ import axios from 'axios'
 import 'bootstrap'
 
 function Dashboard() {
-    const [Trandata,setTData] = useState([])
+  const [Trandata,setTData] = useState([])  
+  const [Tincome, setTIncome] = useState(0);
+  const [Texpense, setTExpense] = useState(0);  
+  
   useEffect(()=>{
         axios.get('http://localhost:5001/transactions')
         .then(res=>{
           const sortedData = res.data.sort((a, b) => { return new Date(b.date) - new Date(a.date); });     
-          setTData(sortedData)
+          setTData(sortedData);
+
+          let Texp = 0;
+          let Tinc = 0;
+
+          sortedData.forEach( item => {
+            if(item.type=== 'Income'){ Tinc += item.amount; }
+            else{Texp += item.amount; }
+          });
+          setTExpense(Math.round(Texp*100)/100);
+          setTIncome(Math.round(Tinc*100)/100);
       })
         .catch(err=>console.log(err));
   },[])
+
+
+  
   return (
     <div className="right-down row pb-2 justify-content-around align-items-center h-100">
           <div className="col-md-4 h-100 rounded text-center">
             <div className="row h-50 justify-content-around align-items-center">
               <div className="col-md-5 border rounded h-50 text-warning fw-bold pt-4">
-                Total Income<h4 className='p-1 pt-3 text-success  fw-bold'>3000₹</h4>
+                Total Income<h5 className='p-1 pt-3 text-success  fw-bold'>{Tincome} ₹</h5>
               </div>
               <div className="col-md-5 border rounded h-50 text-warning fw-bold pt-4">
-                Total Expenses<h4 className='p-1 pt-3 text-danger  fw-bold'>2000₹</h4>
+                Total Expenses<h5 className='p-1 pt-3 text-danger  fw-bold'>{Texpense} ₹</h5>
               </div>
             </div>
             <div className="row h-50 justify-content-center align-items-center">
               <div className="col-md-7 border rounded h-50 text-warning fw-bold pt-4">
-                Total Balance Left<h3 className='p-2 pt-3 text-primary  fw-bold'>100000 ₹</h3>
+                Total Balance Left<h3 className='p-2 pt-3 text-primary  fw-bold'>{Math.round((Tincome-Texpense)*100)/100} ₹</h3>
               </div>
             </div>
           </div>
@@ -42,8 +58,6 @@ function Dashboard() {
                 <th>Amount</th>
                 <th>Type</th>
                 <th>Reference</th>
-                <th>Balance</th>
-            
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +70,6 @@ function Dashboard() {
                             <td style={{color: (item.type==='Expense')?'red':'green', fontWeight : 'bold'}} >{item.amount}₹</td>
                             <td>{item.type}</td>
                             <td>{item.ref}</td>
-                            <td>1000</td>
                         </tr>
                     ))
                 }
