@@ -30,7 +30,7 @@ function Dashboard() {
 
   
   return (
-    <div className="right-down row pb-2 justify-content-around align-items-center h-100">
+    <div className="right-down row pd-1 pt-3 justify-content-around align-items-center" style={{height : '90%'}}>
           <div className="col-md-4 h-100 rounded text-center">
             <div className="row h-50 justify-content-around align-items-center">
               <div className="col-md-5 border rounded h-50 text-warning fw-bold pt-4">
@@ -48,7 +48,7 @@ function Dashboard() {
           </div>
           <div className="col-md-8  border pt-2 h-100 rounded">
           <div className="d-flex flex-column justify-content-evenly h-100 rounded  text-center">
-        <div><h3>Recent Transactions</h3></div>
+        <div><h3 style={{color : 'skyblue'}}>Recent Transactions</h3></div>
         <table className='table table-striped'>
             <thead>
                 <tr>
@@ -62,7 +62,7 @@ function Dashboard() {
             </thead>
             <tbody>
                 {
-                    Trandata.slice(0, 9).map((item,id) => (
+                    Trandata.slice(0, 10).map((item,id) => (
                         <tr key={id}>
                             <td>{id+1}</td>
                             <td>{item.title}</td>

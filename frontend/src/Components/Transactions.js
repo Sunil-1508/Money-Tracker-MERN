@@ -14,12 +14,12 @@ function Transactions() {
         .catch(err=>console.log(err));
   },[])
 
-  const [page,pageNav]=useState([0,9]);
-  const show = Trandata.length > 9;
+  const [page,pageNav]=useState([0,10]);
+  const show = Trandata.length > 10;
 
 
   return (
-    <div className="h-100 pb-2">
+    <div className="pb-1 pt-3" style={{height : '93%'}}>
     <div className="col-md-12 h-100 border px-2 pt-2 rounded ">
         <div className="d-flex flex-column gap-2  rounded  text-center" >
         <table className='table table-striped '>
@@ -49,8 +49,8 @@ function Transactions() {
             </tbody>
         </table>
         {show && <div className="row w-100 align-items-center justify-content-around pb-3 ">
-            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-9,page[1]-9]); setInc(inc-9); }} disabled={page[0] === 0} > Previous </button>
-            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+9,page[1]+9]); setInc(inc+9); }} disabled={page[1] >= Trandata.length} > Next </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-10,page[1]-9]); setInc(inc-10); }} disabled={page[0] === 0} ><i class="bi bi-arrow-left-short"></i> Previous </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+10,page[1]+9]); setInc(inc+10); }} disabled={page[1] >= Trandata.length} > Next <i class="bi bi-arrow-right-short"></i> </button>
         </div>}
         </div>
         </div>
