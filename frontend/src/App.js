@@ -3,6 +3,7 @@ import './App.css';
 import Register from './Components/Register.js'
 import Login from './Components/Login.js'
 import Home from './Components/Home.js'
+import Update from './Components/Update.js'
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />}/>
         <Route path='/home/:id' element={<Home />}/>
+        <Route path='/update/:id' element={<Update />}/>
       </Routes>
     </BrowserRouter>
     

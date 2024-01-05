@@ -73,6 +73,48 @@ app.get('/transactions',async (req,res)=>{
       res.send(err.message);
   }
 })
+app.get('/transactions/:id',async (req,res)=>{
+  try{
+      const Tdata =await TranData.findById(req.params.id);
+      console.log(Tdata);
+      res.send(Tdata);
+  }
+  catch(err){
+      console.log(err.message);
+      res.send(err.message);
+  }
+})
+
+app.put('/transactions/:id', async (req, res) => {
+  try {
+    const updatedTransaction = await TranData.findByIdAndUpdate(req.params.id,req.body,{ new: true });
+
+    if (!updatedTransaction) {
+      return res.status(404).json({ error: 'Transaction not found' });
+    }
+
+    res.json(updatedTransaction);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
+app.delete('/transactions/:id', async (req, res) => {
+  try {
+    const deletedTransaction = await TranData.findByIdAndDelete(req.params.id);
+
+    if (!deletedTransaction) {
+      return res.status(404).json({ error: 'Transaction not found' });
+    }
+
+    res.json({ message: 'Transaction deleted successfully' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
 //To get data ---------------------------------------------------------------------------------------------------------->
 app.get('/getdata',async (req,res)=>{
     try{
