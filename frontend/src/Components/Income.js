@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
-import 'bootstrap'
 import Update from './Update.js'
 import PostData from './PostData.js'
 
@@ -10,6 +9,9 @@ const [Tincome, setTIncome] = useState(0);
 const [inc,setInc] = useState(0);
 const [decide, setDecide] = useState(0);
 const [currId, setCurr] = useState(0);
+const resetDecide = () => {
+  setDecide(0);
+};
 
 useEffect(()=>{
         axios.get('http://localhost:5001/transactions')
@@ -42,14 +44,12 @@ const deleteHandler = (id)=> {
     .catch(error => {
       console.error("Error deleting item:", error.response.data.error || 'Unknown error');
     });
-
-
 }
   return (
     <div className="right-down row p-2 " style={{height : '93%'}}>
     <div className="col-md-5 rounded text-center">
-      {decide === 0 && <PostData />}
-      {decide === 1 && <Update id={currId}/>}
+      {decide === 0 && <PostData type='Income' />}
+      {decide === 1 && <Update id={currId} type='Income' resetDecide={resetDecide}/>}
       <div className="row h-25 justify-content-around align-items-center">
               <div className="col-md-5 border rounded text-warning fw-bold p-2 ">
                 Total Income<h4 className='pt-1 text-success  fw-bold'>{Tincome} ₹</h4>

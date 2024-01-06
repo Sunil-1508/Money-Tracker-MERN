@@ -1,15 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import axios from 'axios'
-import 'bootstrap'
 
-function PostData() {
+function PostData(props) {
 
     const [data,setData] = useState({
         title:'',
         date:'',
         amount:'',
-        type:'Income',
-        ref:'Salary'
+        type: props.type,
+        ref:''
     })
     
     const submitHandeler =  (e)=>{ 
@@ -22,15 +21,14 @@ function PostData() {
         window.alert('Invalid Credentials');
         })
 }
-
-  return (
+return (
     <div className="row h-75 justify-content-around me-1 rounded border align-items-start pt-5">
-        <h4 style={{color : 'skyblue'}} ><i>Add New Income</i></h4>
+        <h4 style={{color : 'skyblue'}} ><i>Add New {props.type}</i></h4>
         <form onSubmit={submitHandeler}>
         <div className="mb-3 row">
             <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
         <div className="col-sm-9 ms-3">
-            <input type="text" className="form-control" id="title" placeholder='Enter Income Source Title' 
+            <input type="text" className="form-control" id="title" placeholder='Ex: Salary, Shopping etc' 
             onChange={(e)=>setData({...data,title:e.target.value })}/>
         </div>
         </div>
@@ -44,20 +42,15 @@ function PostData() {
         <div className="mb-3 row">
             <label htmlFor="amount" className="col-sm-2 col-form-label">Amount</label>
         <div className="col-sm-9 ms-3">
-            <input type="text" className="form-control" id="amount" placeholder='Enter Amount' 
+            <input type="text" className="form-control" id="amount" placeholder='Ex: 200, 25.78 etc' 
             onChange={(e)=>setData({...data,amount:e.target.value })}/>
         </div>
         </div>
         <div className="mb-3  row">
             <label htmlFor="ref" className="col-sm-2 col-form-label">Reference</label>
         <div className="col-sm-9 ms-3">
-            <select type="text" className="form-control" id="ref"  
-            onChange={(e)=>setData({...data,ref:e.target.value })}>
-                <option>Salary</option>
-                <option>Part-Time</option>
-                <option>FreeLancing</option>
-                <option>Others</option>
-            </select>
+            <input type="text" className="form-control" id="ref" placeholder='Ex: Rahul`s bityhday party etc'
+            onChange={(e)=>setData({...data,ref:e.target.value })}/>
         </div>
         </div>
         <div className='ps-3'>

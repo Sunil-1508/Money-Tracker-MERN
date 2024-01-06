@@ -45,7 +45,7 @@ const [logindata,setLoginData] = useState({
         </div>
       </div>
       <div className="col-md-9 right rounded bg-dark vh-75 text-white p-4">
-        <div className="d-flex justify-content-between px-5"><h2 style={{color : 'orange'}}>Your {heading} </h2> <h2 style={{color : 'yellow'}}>Money Track App</h2></div>
+        <div className="d-flex justify-content-between px-5"><h2 style={{color : 'orange'}}>Your {heading} </h2> <h2 style={{color : 'yellow'}} ><i class="bi bi-piggy-bank" ></i> Money Track App <i class="bi bi-bank2"></i></h2></div>
         {heading==='Dashboard' && <Dashboard />}
         {heading==='Transactions' && <Transactions />}
         {heading==='Incomes' && <Income />}
