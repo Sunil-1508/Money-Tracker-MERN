@@ -12,7 +12,7 @@ app.use(cors())
 
 app.listen(port, ()=> console.log(`server running in port ${port}`))
 
-mongoose.connect('mongodb+srv://sunilnoolu:sunil123@cluster0.shxe0yc.mongodb.net/Cluster0?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://sunilnoolu:sunil___@cluster0.shxe0yc.mongodb.net/Cluster0?retryWrites=true&w=majority')
 .then(()=>{ console.log("connected to MongoDB ");  })
 .catch(err => console.log(err))
 
