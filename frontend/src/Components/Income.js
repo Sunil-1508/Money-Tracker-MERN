@@ -59,9 +59,10 @@ const deleteHandler = (id)=> {
       </div>
     </div>
     <div className="col-md-7  border h-100 rounded">
-    <div className="d-flex flex-column gap-2 h-75 rounded  text-center pt-2">
-    <h4 style={{color : 'skyblue'}} ><i>Recent Incomes</i></h4>
-    <table className='table table-striped' >
+    <div className="d-flex flex-column gap-2 h-100 rounded justify-content-between text-center py-4">
+    <div>
+      <h4 style={{color : 'skyblue'}} ><i>Recent Incomes</i></h4>
+      <table className='table table-striped' >
       <thead>
           <tr>
           <th>S.No</th>
@@ -88,7 +89,8 @@ const deleteHandler = (id)=> {
               ))
           }
       </tbody>
-  </table>
+      </table>
+    </div>
   {show && <div className="row w-100 align-items-center justify-content-around p-0 ">
     <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-8,page[1]-8]); setInc(inc-8); }} disabled={page[0] === 0} ><i className="bi bi-arrow-left-short"></i> Previous </button>
     <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+8,page[1]+8]); setInc(inc+8); }} disabled={page[1] >= Trandata.filter(item => item.type === 'Income').length} > Next <i className="bi bi-arrow-right-short"></i> </button>

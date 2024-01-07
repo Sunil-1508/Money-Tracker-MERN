@@ -30,7 +30,7 @@ const [logindata,setLoginData] = useState({
 
   return (
     <div className="bg-secondary container-fluid row px-4 py-4 vh-100 w-100 m-0 gap-5">
-      <div className="col-md-2 left rounded bg-dark vh-75  text-white p-5">
+      <div className="col-md-2 left rounded bg-dark h-100  text-white p-5">
         <h5 >Hi, {logindata.username} </h5>
         <div className="d-flex flex-column justify-content-between align-items-center h-100" >
           <div className="left-up d-flex flex-column gap-3  pt-4 rounded">

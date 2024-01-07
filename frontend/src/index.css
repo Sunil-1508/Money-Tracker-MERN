@@ -2,3 +2,22 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 1081px) {
+  body {
+    background-color: #000000 !important;
+  }
+
+  .unsupported-message h2{
+    margin: 45vh 10vw 0 10vw;
+    display: block !important; 
+  }
+
+  .app-content {
+    display: none; 
+  }
+
+}
+
+
+

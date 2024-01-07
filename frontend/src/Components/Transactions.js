@@ -20,10 +20,11 @@ function Transactions() {
 
 
   return (
-    <div className="pb-1 pt-3" style={{height : '93%'}}>
-    <div className="col-md-12 h-100 border px-2 pt-2 rounded ">
-        <div className="d-flex flex-column gap-2  rounded  text-center" >
-        <table className='table table-striped '>
+    <div className="pb-1 pt-4" style={{height : '90%'}}>
+    <div className="col-md-12 h-100 border px-2 pt-4 rounded ">
+        <div className="d-flex flex-column  h-100 justify-content-between rounded  text-center" >
+        <div>
+            <table className='table table-striped '>
             <thead>
                 <tr>
                 <th>S.No</th>
@@ -48,7 +49,8 @@ function Transactions() {
                     ))
                 }
             </tbody>
-        </table>
+            </table> 
+        </div>
         {show && <div className="row w-100 align-items-center justify-content-around pb-3 ">
             <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-10,page[1]-9]); setInc(inc-10); }} disabled={page[0] === 0} ><i className="bi bi-arrow-left-short"></i> Previous </button>
             <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+10,page[1]+9]); setInc(inc+10); }} disabled={page[1] >= Trandata.length} > Next <i className="bi bi-arrow-right-short"></i> </button>
