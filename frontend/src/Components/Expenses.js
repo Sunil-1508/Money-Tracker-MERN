@@ -53,7 +53,7 @@ const deleteHandler = (id)=> {
       {decide === 1 && <Update id={currId} type='Expense' resetDecide={resetDecide} />}
       <div className="row h-25 justify-content-around align-items-center">
               <div className="col-md-5 border rounded text-warning fw-bold p-2 ">
-                Total Income<h4 className='pt-1 text-success  fw-bold'>{Texpense} ₹</h4>
+                Total Expense<h4 className='pt-1 text-danger  fw-bold'>{Texpense} ₹</h4>
               </div>
       </div>
     </div>
