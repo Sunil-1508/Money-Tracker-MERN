@@ -2,6 +2,7 @@ import React from 'react'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import 'bootstrap'
+import {format} from 'date-fns'
 
 function Dashboard() {
   const [Trandata,setTData] = useState([])  
@@ -66,7 +67,7 @@ function Dashboard() {
                         <tr key={id}>
                             <td>{id+1}</td>
                             <td>{item.title}</td>
-                            <td>{item.date}</td>
+                            <td>{format(item.date,'dd/MM/yyyy')}</td>
                             <td style={{color: (item.type==='Expense')?'red':'green', fontWeight : 'bold'}} >{item.amount}₹</td>
                             <td>{item.type}</td>
                             <td>{item.ref}</td>

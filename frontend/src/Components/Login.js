@@ -30,7 +30,7 @@ function Login() {
 
   return (
     <div className='vh-100 bg-secondary d-flex flex-column align-items-center justify-content-center'>
-      <div className='bg-dark text-white rounded mb-5 p-4'><h1 style={{color:'yellow'}}><i class="bi bi-bank2"> <i class="bi bi-currency-exchange"></i></i><b style={{color:'skyblue'}}> Money Tracker</b> <i class="bi bi-piggy-bank-fill"> ₹ </i></h1></div>
+      <div className='bg-dark text-white rounded mb-5 p-4'><h1 style={{color:'yellow'}}><i className="bi bi-bank2"> <i className="bi bi-currency-exchange"></i></i><b style={{color:'skyblue'}}> Money Tracker</b> <i className="bi bi-piggy-bank-fill"> ₹ </i></h1></div>
       <div className='h-50 bg-dark text-white rounded p-4 w-25'>
       <h3 className='mb-2 text-center'>WELCOME</h3>
         <form className='form form-striped px-2' onSubmit={submitHandler}>

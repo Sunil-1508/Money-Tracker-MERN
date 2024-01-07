@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 
+
 function PostData(props) {
 
     const [data,setData] = useState({
@@ -15,7 +16,7 @@ function PostData(props) {
         e.preventDefault();
         console.log(data);
         axios.post('http://localhost:5001/transactions',data)
-        .then(window.location.reload())
+        .then()
         .catch(error=>{
         console.error('Login failed:', error.response.data.error || 'Unknown error');
         window.alert('Invalid Credentials');

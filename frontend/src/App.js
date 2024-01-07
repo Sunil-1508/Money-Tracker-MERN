@@ -6,6 +6,7 @@ import Home from './Components/Home.js'
 import Update from './Components/Update.js'
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+
 function App() {
   return (
     <BrowserRouter>

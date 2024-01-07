@@ -38,7 +38,7 @@ function Update(props) {
     e.preventDefault();
     console.log('Submit Data:', data); 
     axios.put(`http://localhost:5001/transactions/${id}`, data)
-      .then(() => window.location.reload())
+      .then()
       .catch(error => {
         console.error('Update failed:', error.response.data.error || 'Unknown error');
         window.alert('Update failed');

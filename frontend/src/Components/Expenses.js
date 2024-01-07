@@ -3,6 +3,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import Update from './Update.js'
 import PostData from './PostData.js'
+import {format} from 'date-fns'
 
 function Expenses() {
 const [Trandata,setTData] = useState([])
@@ -13,6 +14,7 @@ const [currId, setCurr] = useState(0);
 const resetDecide = () => {
   setDecide(0);
 };
+
 
 useEffect(()=>{
         axios.get('http://localhost:5001/transactions')
@@ -25,7 +27,7 @@ useEffect(()=>{
           setTExpense(Math.round(Texp*1000)/1000);
       })
         .catch(err=>console.log(err));
-},[])
+},[Trandata])
 
 const [page,pageNav]=useState([0,8]);
 const maxlen =Trandata.filter(item => item.type === 'Expense' ).length;
@@ -38,7 +40,7 @@ const deleteHandler = (id)=> {
   axios.delete('http://localhost:5001/transactions/'+id)
   .then(response => {
     console.log("Item deleted successfully");
-    window.location.reload();
+    
   })
   .catch(error => {
     console.error("Error deleting item:", error.response.data.error || 'Unknown error');
@@ -47,8 +49,8 @@ const deleteHandler = (id)=> {
   return (
     <div className="right-down row p-2 " style={{height : '93%'}}>
     <div className="col-md-5 rounded text-center">
-      {decide === 0 && <PostData type='Expense' />}
-      {decide === 1 && <Update id={currId} type='Expense' resetDecide={resetDecide}/>}
+      {decide === 0 && <PostData type='Expense'/>}
+      {decide === 1 && <Update id={currId} type='Expense' resetDecide={resetDecide} />}
       <div className="row h-25 justify-content-around align-items-center">
               <div className="col-md-5 border rounded text-warning fw-bold p-2 ">
                 Total Income<h4 className='pt-1 text-success  fw-bold'>{Texpense} ₹</h4>
@@ -75,11 +77,11 @@ const deleteHandler = (id)=> {
                   <tr key={id}>
                       <td>{id+1+inc}</td>
                       <td>{item.title}</td>
-                      <td>{item.date}</td>
+                      <td>{format(item.date,'dd/MM/yyyy')}</td>
                       <td style={{'color': 'red', fontWeight : 'bold'}} >{item.amount}₹</td>
                       <td>{item.ref}</td>
-                      <td><button className='btn btn-warning btn-sm me-2' onClick={()=> {setDecide(1); setCurr(item._id)}}><b><i class="bi bi-arrow-repeat"></i></b></button>
-                          <button className='btn btn-danger btn-sm' onClick={()=> {deleteHandler(item._id)}}><i class="bi bi-trash"></i></button>
+                      <td><button className='btn btn-warning btn-sm me-2' onClick={()=> {setDecide(1); setCurr(item._id)}}><b><i className="bi bi-arrow-repeat"></i></b></button>
+                          <button className='btn btn-danger btn-sm' onClick={()=> {deleteHandler(item._id)}}><i className="bi bi-trash"></i></button>
                       </td>
                   </tr>
               ))
@@ -87,8 +89,8 @@ const deleteHandler = (id)=> {
       </tbody>
   </table>
   {show && <div className="row w-100 align-items-center justify-content-around p-0 ">
-    <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-8,page[1]-8]); setInc(inc-8); }} disabled={page[0] === 0} ><i class="bi bi-arrow-left-short"></i> Previous </button>
-    <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+8,page[1]+8]); setInc(inc+8); }} disabled={page[1] >= Trandata.filter(item => item.type === 'Expense').length} > Next <i class="bi bi-arrow-right-short"></i></button>
+    <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-8,page[1]-8]); setInc(inc-8); }} disabled={page[0] === 0} ><i className="bi bi-arrow-left-short"></i> Previous </button>
+    <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+8,page[1]+8]); setInc(inc+8); }} disabled={page[1] >= Trandata.filter(item => item.type === 'Expense').length} > Next <i className="bi bi-arrow-right-short"></i></button>
   </div>}
   </div>
   </div>

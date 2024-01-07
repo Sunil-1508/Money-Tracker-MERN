@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import 'bootstrap'
+import {format} from 'date-fns'
 
 function Transactions() {
   const [Trandata,setTData] = useState([]);
@@ -39,7 +40,7 @@ function Transactions() {
                         <tr key={id}>
                             <td >{id+1+inc}</td>
                             <td >{item.title}</td>
-                            <td >{item.date}</td>
+                            <td >{format(item.date,'dd/MM/yyyy')}</td>
                             <td style={{'color': (item.type==='Expense')?'red':'green', fontWeight : 'bold'}} >{item.amount}₹</td>
                             <td >{item.type}</td>
                             <td >{item.ref}</td>
@@ -49,8 +50,8 @@ function Transactions() {
             </tbody>
         </table>
         {show && <div className="row w-100 align-items-center justify-content-around pb-3 ">
-            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-10,page[1]-9]); setInc(inc-10); }} disabled={page[0] === 0} ><i class="bi bi-arrow-left-short"></i> Previous </button>
-            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+10,page[1]+9]); setInc(inc+10); }} disabled={page[1] >= Trandata.length} > Next <i class="bi bi-arrow-right-short"></i> </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]-10,page[1]-9]); setInc(inc-10); }} disabled={page[0] === 0} ><i className="bi bi-arrow-left-short"></i> Previous </button>
+            <button className='col-md-2 btn btn-light p-0' onClick={()=>{ pageNav([page[0]+10,page[1]+9]); setInc(inc+10); }} disabled={page[1] >= Trandata.length} > Next <i className="bi bi-arrow-right-short"></i> </button>
         </div>}
         </div>
         </div>
