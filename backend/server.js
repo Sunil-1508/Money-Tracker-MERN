@@ -8,7 +8,20 @@ import cors from 'cors'
 const app = express();
 const port = 5001;
 app.use(express.json())
-app.use(cors())
+
+// Allow only specific origins
+const allowedOrigins = ['https://money-tracker-mern-kfd7-1pctp7hnb-sunil-noolus-projects.vercel.app/', '*'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Check if the request origin is allowed
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 app.listen(port, ()=> console.log(`server running in port ${port}`))
 
