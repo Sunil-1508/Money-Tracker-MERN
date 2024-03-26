@@ -18,7 +18,7 @@ function Login() {
     } 
     else {
       try {
-        const response = await axios.post('http://localhost:5001/validate', data);
+        const response = await axios.post('https://money-tracker-mern-kfd7.vercel.app/validate', data);
         console.log('Request sent:', response.data);
         navigate('/home/'+response.data);
       } catch (error) {

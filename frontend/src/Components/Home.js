@@ -16,7 +16,7 @@ const [logindata,setLoginData] = useState({
   })
   const {id} = useParams();
   useEffect(()=>{
-        axios.get('http://localhost:5001/getdata/'+id)
+        axios.get('https://money-tracker-mern-kfd7.vercel.app/getdata/'+id)
         .then(
           res=>{setLoginData(res.data); }
           )

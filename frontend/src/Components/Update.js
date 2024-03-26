@@ -14,7 +14,7 @@ function Update(props) {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/transactions/${id}`)
+    axios.get(`https://money-tracker-mern-kfd7.vercel.app/transactions/${id}`)
       .then(response => {
         const { title, date, amount, ref } = response.data;
         console.log(response.data); // Check the data received from the server
@@ -37,7 +37,7 @@ function Update(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log('Submit Data:', data); 
-    axios.put(`http://localhost:5001/transactions/${id}`, data)
+    axios.put(`https://money-tracker-mern-kfd7.vercel.app/transactions/${id}`, data)
       .then()
       .catch(error => {
         console.error('Update failed:', error.response.data.error || 'Unknown error');

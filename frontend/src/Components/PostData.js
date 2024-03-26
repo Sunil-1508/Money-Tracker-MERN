@@ -15,7 +15,7 @@ function PostData(props) {
     const submitHandeler =  (e)=>{ 
         e.preventDefault();
         console.log(data);
-        axios.post('http://localhost:5001/transactions',data)
+        axios.post('https://money-tracker-mern-kfd7.vercel.app/transactions',data)
         .then()
         .catch(error=>{
         console.error('Login failed:', error.response.data.error || 'Unknown error');

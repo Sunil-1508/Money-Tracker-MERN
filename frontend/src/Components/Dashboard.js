@@ -10,7 +10,7 @@ function Dashboard() {
   const [Texpense, setTExpense] = useState(0);  
   
   useEffect(()=>{
-        axios.get('http://localhost:5001/transactions')
+        axios.get('https://money-tracker-mern-kfd7.vercel.app/transactions')
         .then(res=>{
           const sortedData = res.data.sort((a, b) => { return new Date(b.date) - new Date(a.date); });     
           setTData(sortedData);
